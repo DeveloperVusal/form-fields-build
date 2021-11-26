@@ -1,0 +1,9 @@
+# Packages
+/node_modules
+
+# Project
+/public/dist
+
+# Other files
+/.idea
+/.vscode

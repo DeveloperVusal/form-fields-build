@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Fields Build</title>
+</head>
+<body>
+    <form id="app"></form>
+
+    <script src="./dist/form-fields-build.min.js"></script>
+
+    <script>
+        FormValid.init({
+            el: '#app',
+            fields: [
+                {
+                    type: 'text',
+                    name: 'Телефон',
+                    validate: 'phone'
+                },
+                {
+                    type: 'password',
+                    name: 'Пароль',
+                    validate: 'min:3|max:20'
+                },
+                {
+                    type: 'email',
+                    name: 'E-mail',
+                    value: 'dev@mail.com',
+                    validate: true
+                }
+            ]
+        })
+    </script>
+</body>
+</html>
