@@ -1,10 +1,7 @@
 import { init } from './components/init'
 
 (function() {
-    window.FormValid = {
+    window.FormFieldsBuild = {
         init: init
     }
 })()
-
-
-
