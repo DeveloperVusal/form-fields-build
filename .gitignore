@@ -2,8 +2,9 @@
 /node_modules
 
 # Project
-/public/dist
+/public
 
 # Other files
 /.idea
 /.vscode
+/.well-known
