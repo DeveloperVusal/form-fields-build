@@ -5,14 +5,22 @@ const filename = 'form-fields-build-' + version + '.min.js' // Наименов�
 
 module.exports = {
     devServer: {
-        static: {
-            directory: path.join(__dirname, 'public'), // Говорим серверу, следи за папкой public
-            staticOptions: {
-                index: 'index.htm' // Указываем индексный файл "index.htm" -> по умолчанию "index.html"
+        static: [
+            {
+                directory: path.join(__dirname, 'public'), // Говорим серверу, следи за папкой public
+                staticOptions: {
+                    index: 'index.htm' // Указываем индексный файл "index.htm" -> по умолчанию "index.html"
+                }
+            },
+            {
+                directory: path.join(__dirname, 'src'),
+                publicPath: '/js'
             }
-        },
+        ],
+        watchFiles: ['src/*'],
         compress: true, // Сжатие файлов
         port: 9000, // Порт сервера 9000
+        open: true
     },
     mode: 'production', // Собираем сразу для Продакшн версии
     entry: ["@babel/polyfill", './src/index.js'], // Входный файл для сборки

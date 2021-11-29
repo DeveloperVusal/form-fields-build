@@ -11,6 +11,7 @@
   "main": "index.js",
   "scripts": {
     "serve": "webpack serve",
+    "dev": "webpack --mode development",
     "build": "webpack --mode production"
   },
   "author": "",
@@ -24,6 +25,7 @@
     "webpack-dev-server": "^4.5.0"
   },
   "dependencies": {
+    "@babel/polyfill": "^7.12.1",
     "css-loader": "^6.5.1",
     "style-loader": "^3.3.1"
   }
