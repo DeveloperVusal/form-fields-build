@@ -1,6 +1,6 @@
 {
   "name": "form-fields-build",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "",
   "keywords": [
     "form",
@@ -8,11 +8,12 @@
     "build",
     "inputs"
   ],
-  "main": "index.js",
+  "main": "./src/index.js",
   "scripts": {
-    "serve": "webpack serve",
-    "dev": "webpack --mode development",
-    "build": "webpack --mode production"
+    "serve": "webpack-dev-server --config webpack.serve.config.js",
+    "watch": "webpack --watch --config webpack.dev.config.js",
+    "dev": "webpack --config webpack.dev.config.js",
+    "build": "webpack --config webpack.prod.config.js"
   },
   "author": "",
   "license": "MIT",
@@ -20,6 +21,7 @@
     "@babel/core": "^7.16.0",
     "@babel/preset-env": "^7.16.4",
     "babel-loader": "^8.2.3",
+    "html-webpack-plugin": "^5.5.0",
     "webpack": "^5.64.4",
     "webpack-cli": "^4.9.1",
     "webpack-dev-server": "^4.5.0"

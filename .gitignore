@@ -3,8 +3,10 @@
 
 # Project
 /public
+/dist
 
 # Other files
+/.env
 /.idea
 /.vscode
 /.well-known
