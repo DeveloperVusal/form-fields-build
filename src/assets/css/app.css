@@ -1,0 +1,16 @@
+.ffpformbuild {
+    display: block;
+    padding: 0px;
+}
+
+.ffpformbuild__field {
+    display: flex;
+    justify-content: space-between;
+}
+
+.ffpformbuild__field > label {
+    width: 30%;
+}
+.ffpformbuild__field > input {
+    width: 70%
+}

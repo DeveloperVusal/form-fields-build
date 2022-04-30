@@ -7,7 +7,7 @@ export const init = (options) => {
 
     for (let item of options.fields) {
         fields += `
-            <div style="display: block;">
+            <div class="ffpformbuild__field">
                 <label for="${item.name}">${item.label}</label>
                 <input id="${item.name}" type="${item.type}" name="${item.name}" value="${(item.value) ? item.value : ''}" />
             </div>
@@ -15,7 +15,7 @@ export const init = (options) => {
     }
 
     const html = `
-        <div style="margin: 4rem auto; width: 25%">
+        <div class="ffpformbuild">
             ${fields}
         </div>
     `
