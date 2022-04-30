@@ -10,31 +10,29 @@
     <form id="app"></form>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            var formApp = new FormFieldsBuild.init({
-                el: '#app',
-                fields: [
-                    {
-                        type: 'text',
-                        name: 'phone',
-                        label: 'Телефон',
-                        validate: 'phone'
-                    },
-                    {
-                        type: 'password',
-                        name: 'password',
-                        label: 'Пароль',
-                        validate: 'min:3|max:20'
-                    },
-                    {
-                        type: 'email',
-                        name: 'email',
-                        label: 'E-mail',
-                        value: 'dev@mail.com',
-                        validate: true
-                    }
-                ]
-            })
+        FormFieldsBuild.init({
+            el: '#app',
+            fields: [
+                {
+                    type: 'text',
+                    name: 'phone',
+                    label: 'Телефон',
+                    validate: 'phone'
+                },
+                {
+                    type: 'password',
+                    name: 'password',
+                    label: 'Пароль',
+                    validate: 'min:3|max:20'
+                },
+                {
+                    type: 'email',
+                    name: 'email',
+                    label: 'E-mail',
+                    value: 'dev@mail.com',
+                    validate: true
+                }
+            ]
         })
     </script>
 </body>
