@@ -46,3 +46,7 @@
     transition: font-size 0.5s, transform 0.5s;
     color: #333 !important;
 }
+.ffpformbuild__field--focused > input {
+    z-index: 0;
+    opacity: 1;
+}
