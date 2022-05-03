@@ -8,27 +8,25 @@
     "build",
     "inputs"
   ],
-  "main": "./src/index.js",
+  "main": "src/index.ts",
   "scripts": {
-    "serve": "webpack-dev-server --config webpack.serve.config.js",
-    "watch": "webpack --watch --config webpack.dev.config.js",
-    "dev": "webpack --config webpack.dev.config.js",
-    "build": "webpack --config webpack.prod.config.js"
+    "serve": "webpack serve --env mode=development",
+    "dev": "webpack --env mode=development",
+    "build": "webpack --env mode=production"
   },
   "author": "",
   "license": "MIT",
   "devDependencies": {
-    "@babel/core": "^7.16.0",
-    "@babel/preset-env": "^7.16.4",
-    "babel-loader": "^8.2.3",
+    "css-loader": "^6.5.1",
     "html-webpack-plugin": "^5.5.0",
+    "mini-css-extract-plugin": "^2.6.0",
+    "sass": "^1.51.0",
+    "sass-loader": "^12.6.0",
+    "style-loader": "^3.3.1",
+    "ts-loader": "^9.3.0",
+    "typescript": "^4.6.4",
     "webpack": "^5.64.4",
     "webpack-cli": "^4.9.1",
     "webpack-dev-server": "^4.5.0"
-  },
-  "dependencies": {
-    "@babel/polyfill": "^7.12.1",
-    "css-loader": "^6.5.1",
-    "style-loader": "^3.3.1"
   }
 }
