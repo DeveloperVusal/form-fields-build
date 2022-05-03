@@ -1,6 +1,5 @@
-
 // При включении фокуса
-export const formInputFocus = (event) => {
+export const formInputFocus = (event: any) => {
     const elem = event.target
     const tag_name = elem.tagName.toLowerCase()
     let input = null
@@ -11,14 +10,14 @@ export const formInputFocus = (event) => {
         } else {
             input = elem.childNodes[3]
         }
-        
+
         input.parentNode.classList.add('ffpformbuild__field--focused')
         input.focus()
     }
 }
 
 // При отключении фокуса
-export const formInputBlur = (event) => {
+export const formInputBlur = (event: any) => {
     const elem = event.target
     const items = elem.parentNode.parentNode.querySelectorAll('.ffpformbuild__field')
 

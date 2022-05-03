@@ -11,35 +11,40 @@
             width: 25%;
         }
     </style>
-<script src="./form-fields-build-0.0.3.min.js"></script></head>
 <body>
-    <form id="app"></form>
+<form id="app"></form>
+<script src="<%= htmlWebpackPlugin.files.js %>"></script>
+<script>
+    window.FormFieldsBuild.init({
+        el: '#app',
+        fields: [
+            {
+                type: 'text',
+                name: 'phone',
+                placeholder: 'Телефон',
+                className: 's',
+                validate: 'email',
+                value: '1',
+            },
+            {
+                type: 'text',
+                name: 'phone',
+                placeholder: 'Телефон',
+                className: 's',
+                validate: 'email',
+                value: '1',
+            },
+            {
+                type: 'text',
+                name: 'phone',
+                placeholder: 'Телефон',
+                className: 's',
+                validate: 'email',
+                value: '1',
+            }
+        ]
+    })
+</script>
 
-    <script>
-        FormFieldsBuild.init({
-            el: '#app',
-            fields: [
-                {
-                    type: 'text',
-                    name: 'phone',
-                    label: 'Телефон',
-                    validate: 'phone'
-                },
-                {
-                    type: 'password',
-                    name: 'password',
-                    label: 'Пароль',
-                    validate: 'min:3|max:20'
-                },
-                {
-                    type: 'email',
-                    name: 'email',
-                    label: 'E-mail',
-                    value: 'dev@mail.com',
-                    validate: true
-                }
-            ]
-        })
-    </script>
 </body>
 </html>
