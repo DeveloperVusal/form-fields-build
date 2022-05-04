@@ -1,5 +1,9 @@
 # Changelog
 
+## version 0.0.4 (04-05-2022)
+* Refactoring the project structure
+* Eddited builder form fields
+
 ## version 0.0.3 (30-04-2022)
 * Refactoring the project structure
 * Fixed visible a global object
