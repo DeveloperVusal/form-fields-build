@@ -1,40 +1,41 @@
-import {formInputFocus, formInputBlur} from './functions'
+import {eventFocus, eventBlur} from './functions'
 
 
-import {Options} from "../__types__/option.type";
+import {OptionField, Options} from "../__types__/option.type";
+import {PROJECT_CLASS_NAMES} from "../__types__/constants.type";
 
-export const init = (options: Options) => {
-    let fields = ''
-    // Генерируем поля
-    for (let item of options.fields) {
-        fields += `
-            <div class="ffpformbuild__field${(item.value) ? ' ffpformbuild__field--focused' : ''}">
-                <label for="${item.name}">${item.placeholder}</label>
-                <input id="${item.name}" type="${item.type}" name="${item.name}" value="${(item.value) ? item.value : ''}" />
-            </div>
-        `
+
+export const init = (options: Options): void => {
+    const elementRoot: Element = document.querySelector(options.el) as Element;
+    if (!isExistElement(elementRoot)) {
+        throw new Error('Element dont exist!');
     }
+    options.fields.forEach(insertHtmlToElementByLoop(elementRoot, 'beforeend'));
+    elementRoot.childNodes.forEach(addEventListenerForElement);
+}
 
-    // Генерируем форму
-    const html = `
-        <div class="ffpformbuild">
-            ${fields}
-        </div>
-    `
-    // Рисуем на экране готовую форму
-    document.querySelector(options.el as any).innerHTML = html
+const insertHtmlToElementByLoop = (element: Element, position: InsertPosition) => (field: OptionField): void => {
+    element.insertAdjacentHTML(position, createInputWithStyle(field))
+}
 
-    // Получаем созданные поля
-    const list_inputs: any = document.querySelectorAll(`${options.el} .ffpformbuild__field`)
+const addEventListenerForElement = (node: ChildNode): void => {
+    const inputElement = (node as Element).lastElementChild as Element;
+    inputElement.addEventListener('focus', eventFocus)
+    inputElement.addEventListener('blur', eventBlur);
+}
 
-    // Оживляем поля при нажатии
-    for (let item of list_inputs) {
-        item.addEventListener('click', (e: any) => {
-            formInputFocus(e)
-        })
+const createInputWithStyle = (field: OptionField): string => {
+    return (
+        `<div class=${PROJECT_CLASS_NAMES.FIELD}>
+            <label for="${field.name}" class="${field.value ? PROJECT_CLASS_NAMES.FOCUS : ""}">${field.placeholder}</label>
+            <input name="${field.name}" 
+                   type="${field.type}" 
+                   value="${field.value ?? ''}"
+            />
+        </div>`
+    )
+}
 
-        item.querySelector('input').addEventListener('blur', (e: any) => {
-            formInputBlur(e)
-        })
-    }
+const isExistElement = (element: Element): boolean => {
+    return !!element;
 }
