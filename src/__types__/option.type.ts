@@ -2,7 +2,7 @@ import {InputType} from "./option-field/input.type";
 import {ValidateType} from "./option-field/validate.type";
 
 
-export interface OptionFields {
+export interface OptionField {
     type: keyof typeof InputType,
     name: string,
     placeholder?: string,
@@ -13,6 +13,6 @@ export interface OptionFields {
 
 export interface Options {
     el: string,
-    fields: Array<OptionFields>
+    fields: Array<OptionField>
 }
 

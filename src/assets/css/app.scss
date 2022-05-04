@@ -1,54 +1,37 @@
 .ffpformbuild {
-  display: block;
-  padding: 0;
-
   &__field {
-    display: flex;
+    $self: &;
     position: relative;
-    margin-bottom: 2rem;
-    justify-content: center;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    background-color: transparent;
-    height: 65px;
 
     & > input {
+      box-sizing: border-box;
       font-size: 12pt;
       display: block;
       width: 100%;
-      padding: 0 18px;
-      background-color: transparent;
-      outline: none;
-      border: none;
+      padding: 13px 18px 0 18px;
       border-radius: 4px;
-      margin-top: 15px;
-      z-index: -10;
-      opacity: 0;
+      margin-bottom: 2rem;
+      justify-content: center;
+      border: 1px solid #ddd;
+      background-color: transparent;
+      height: 65px;
     }
 
     & > label {
       left: 0;
       top: 0;
       position: absolute;
-      transform: translateX(18px) translateY(25px);
+      transform: translateX(18px) translateY(23px);
       font-size: 12pt;
       color: #868686;
       transition: font-size 0.5s, transform 0.5s;
-    }
 
-    &--focused {
-      border-color: #333 !important;
-
-      & > label {
+      &#{$self}--focused {
+        border-color: #333 !important;
         transform: translateX(18px) translateY(10px);
         font-size: 10.5pt;
         transition: font-size 0.5s, transform 0.5s;
-        color: #333 !important;
-      }
-
-      & > input {
-        z-index: 0;
-        opacity: 1;
+        color: #333333;
       }
     }
   }
