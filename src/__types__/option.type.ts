@@ -9,6 +9,7 @@ export interface OptionField {
     validate?: keyof typeof ValidateType,
     className?: string,
     value?: string,
+    required?: boolean
 }
 
 export interface Options {

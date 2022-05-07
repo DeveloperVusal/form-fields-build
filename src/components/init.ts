@@ -1,16 +1,17 @@
 import {eventFocus, eventBlur} from './functions'
-
-
 import {OptionField, Options} from "../__types__/option.type";
 import {PROJECT_CLASS_NAMES} from "../__types__/constants.type";
 
 
 export const init = (options: Options): void => {
     const elementRoot: Element = document.querySelector(options.el) as Element;
+
     if (!isExistElement(elementRoot)) {
         throw new Error('Element dont exist!');
     }
-    options.fields.forEach(insertHtmlToElementByLoop(elementRoot, 'beforeend'));
+
+    options.fields.forEach(insertHtmlToElementByLoop(elementRoot, 'beforeend'))
+
     elementRoot.childNodes.forEach(addEventListenerForElement);
 }
 
@@ -31,6 +32,7 @@ const createInputWithStyle = (field: OptionField): string => {
             <input name="${field.name}" 
                    type="${field.type}" 
                    value="${field.value ?? ''}"
+                   ${field.required ? 'required' : ''}
             />
         </div>`
     )
