@@ -14,6 +14,8 @@ export interface OptionField {
 
 export interface Options {
     el: string,
-    fields: Array<OptionField>
+    fields: Array<OptionField>,
+    url?: string,
+    method?: string
 }
 
