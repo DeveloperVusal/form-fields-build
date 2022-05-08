@@ -1,4 +1,4 @@
-import {eventFocus, eventBlur} from './functions'
+import {eventFocus, eventBlur, eventChange, formatField} from './functions'
 import {OptionField, Options} from "../__types__/option.type";
 import {PROJECT_CLASS_NAMES} from "../__types__/constants.type";
 
@@ -23,6 +23,7 @@ const addEventListenerForElement = (node: ChildNode): void => {
     const inputElement = (node as Element).lastElementChild as Element;
     inputElement.addEventListener('focus', eventFocus)
     inputElement.addEventListener('blur', eventBlur);
+    inputElement.addEventListener('input', eventChange)
 }
 
 const createInputWithStyle = (field: OptionField): string => {
@@ -31,7 +32,7 @@ const createInputWithStyle = (field: OptionField): string => {
             <label for="${field.name}" class="${field.value ? PROJECT_CLASS_NAMES.FOCUS : ""}">${field.placeholder}</label>
             <input name="${field.name}" 
                    type="${field.type}" 
-                   value="${field.value ?? ''}"
+                   value="${formatField(field.name, field.value ?? '') ?? ''}"
                    ${field.required ? 'required' : ''}
             />
         </div>`
