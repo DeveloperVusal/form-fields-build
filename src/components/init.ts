@@ -1,4 +1,4 @@
-import {eventFocus, eventBlur, eventChange, getCorrectStringByValidate} from './functions'
+import {eventFocus, eventBlur, eventChange, getCorrectValue} from './functions'
 import {OptionField, Options} from "../__types__/option.type";
 import {PROJECT_CLASS_NAMES} from "../__types__/constants.type";
 
@@ -14,20 +14,22 @@ export const init = (options: Options): void => {
         throw new Error('Required fields dont exist!');
     }
 
-    options.fields.forEach(insertHtmlToElementByLoop(elementRoot, 'beforeend'))
-
-    elementRoot.childNodes.forEach(addEventListenerForElement);
+    options.fields.forEach(insertHtmlToElementByLoop(elementRoot));
 }
 
-const insertHtmlToElementByLoop = (element: Element, position: InsertPosition) => (field: OptionField): void => {
-    element.insertAdjacentHTML(position, createInputWithStyle(field))
+const insertHtmlToElementByLoop = (element: Element) => (optionField: OptionField): void => {
+    const elementInput = new DOMParser()
+        .parseFromString(createInputWithStyle(optionField), "text/html")
+        .getElementsByTagName("div")[0];
+
+    addEventListenerForElement(elementInput.lastElementChild!, optionField);
+    element.append(elementInput);
 }
 
-const addEventListenerForElement = (node: ChildNode): void => {
-    const inputElement = (node as Element).lastElementChild as Element;
-    inputElement.addEventListener('focus', eventFocus)
-    inputElement.addEventListener('blur', eventBlur);
-    inputElement.addEventListener('input', eventChange)
+const addEventListenerForElement = (node: Element, optionField: OptionField): void => {
+    node.addEventListener('focus', eventFocus)
+    node.addEventListener('blur', eventBlur);
+    node.addEventListener('input', eventChange(optionField))
 }
 
 const createInputWithStyle = (field: OptionField): string => {
@@ -36,8 +38,7 @@ const createInputWithStyle = (field: OptionField): string => {
             <label for="${field.name}" class="${field.value ? PROJECT_CLASS_NAMES.FOCUS : ""}">${field.placeholder ?? ''}</label>
             <input name="${field.name}" 
                    type="${field.type}" 
-                   value="${getCorrectStringByValidate(field.validate, field.value)}"
-                   data-validate="${field.validate}"
+                   value="${getCorrectValue({field: field.validate}, field.value)}"
                    ${field.required ? 'required' : ''}
             />
         </div>`
