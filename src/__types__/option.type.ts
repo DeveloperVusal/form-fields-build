@@ -2,11 +2,17 @@ import {InputType} from "./option-field/input.type";
 import {ValidateType} from "./option-field/validate.type";
 
 
-export interface OptionField {
-    type: keyof typeof InputType,
-    name: string,
+export type Validate = keyof typeof ValidateType | null | undefined;
+export type Input = keyof typeof InputType;
+
+export interface FieldsRequired {
+    type: Input,
+    name: string
+}
+
+export interface OptionField extends FieldsRequired {
     placeholder?: string,
-    validate?: keyof typeof ValidateType,
+    validate?: Validate,
     className?: string,
     value?: string,
     required?: boolean
