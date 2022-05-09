@@ -21,10 +21,34 @@
             {
                 type: 'text',
                 name: 'phone',
-                placeholder: 'Phone',
+                placeholder: 'Phone (Просто phone)',
                 className: 's',
                 validate: 'phone',
                 value: '7977896847 ss',
+                required: true
+            },
+            {
+                type: 'text',
+                name: 'phone_1',
+                placeholder: 'Phone (валидация через массив)',
+                className: 's',
+                validate: ['phone', 'ru_temp_1'],
+                // value: '7977896847 ss',
+                required: true
+            },
+            {
+                type: 'text',
+                name: 'phone_2',
+                placeholder: 'Phone (валидация через функцию)',
+                className: 's',
+                validate: (value) => {
+                    if (!value) {
+                        throw new Error('Custom error');
+                    }
+                    let stringWithNumbers = value.replace(/\D/ig, '');
+                    if (!stringWithNumbers) return '';
+                    return '+' + stringWithNumbers;
+                },
                 required: true
             },
             {
