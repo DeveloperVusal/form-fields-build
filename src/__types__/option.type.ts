@@ -1,8 +1,17 @@
 import {InputType} from "./option-field/input.type";
 import {ValidateType} from "./option-field/validate.type";
+import {TemplatePhone} from "./option-field/templates.type";
 
+type ValidateKeyOf = typeof ValidateType[keyof typeof ValidateType];
 
-export type Validate = keyof typeof ValidateType | null | undefined;
+type TemplatePhoneKeyOf = keyof typeof TemplatePhone;
+
+type ValidateFun = (value: string) => string;
+
+type ValidateField = ValidateKeyOf | null | undefined | ValidateFun | [ValidateKeyOf, TemplatePhoneKeyOf];
+
+export type Validate = { field: ValidateField, template?: TemplatePhoneKeyOf };
+
 export type Input = keyof typeof InputType;
 
 export interface FieldsRequired {
@@ -12,7 +21,7 @@ export interface FieldsRequired {
 
 export interface OptionField extends FieldsRequired {
     placeholder?: string,
-    validate?: Validate,
+    validate?: ValidateField,
     className?: string,
     value?: string,
     required?: boolean
