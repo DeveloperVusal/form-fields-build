@@ -1,4 +1,4 @@
-import {eventFocus, eventBlur, eventChange, formatField} from './functions'
+import {eventFocus, eventBlur, eventChange, getCorrectStringByValidate} from './functions'
 import {OptionField, Options} from "../__types__/option.type";
 import {PROJECT_CLASS_NAMES} from "../__types__/constants.type";
 
@@ -8,6 +8,10 @@ export const init = (options: Options): void => {
 
     if (!isExistElement(elementRoot)) {
         throw new Error('Element dont exist!');
+    }
+
+    if (!isExistRequiredFields(options.fields)) {
+        throw new Error('Required fields dont exist!');
     }
 
     options.fields.forEach(insertHtmlToElementByLoop(elementRoot, 'beforeend'))
@@ -29,10 +33,11 @@ const addEventListenerForElement = (node: ChildNode): void => {
 const createInputWithStyle = (field: OptionField): string => {
     return (
         `<div class=${PROJECT_CLASS_NAMES.FIELD}>
-            <label for="${field.name}" class="${field.value ? PROJECT_CLASS_NAMES.FOCUS : ""}">${field.placeholder}</label>
+            <label for="${field.name}" class="${field.value ? PROJECT_CLASS_NAMES.FOCUS : ""}">${field.placeholder ?? ''}</label>
             <input name="${field.name}" 
                    type="${field.type}" 
-                   value="${formatField(field.name, field.value ?? '') ?? ''}"
+                   value="${getCorrectStringByValidate(field.validate, field.value)}"
+                   data-validate="${field.validate}"
                    ${field.required ? 'required' : ''}
             />
         </div>`
@@ -41,4 +46,8 @@ const createInputWithStyle = (field: OptionField): string => {
 
 const isExistElement = (element: Element): boolean => {
     return !!element;
+}
+
+const isExistRequiredFields = (fields: Array<OptionField>): boolean => {
+    return fields.every(item => item.name && item.type);
 }

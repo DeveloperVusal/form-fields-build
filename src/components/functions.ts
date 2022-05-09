@@ -1,8 +1,9 @@
-import {OptionField} from "../__types__/option.type";
 import {PROJECT_CLASS_NAMES} from "../__types__/constants.type";
+import {Validate} from "../__types__/option.type";
+import {ValidateType} from "../__types__/option-field/validate.type";
 
 interface TargetAndPreviousElement {
-    target: Element,
+    target: HTMLInputElement,
     label: Element
 }
 
@@ -15,15 +16,13 @@ export const eventFocus = (event: Event): void => {
 // При отключении фокуса
 export const eventBlur = (event: Event): void => {
     const {target, label} = getTargetAndPreviousElement(event);
-    deleteClassByValue((target as Pick<OptionField, 'value'>).value, label);
+    deleteClassByValue(target.value, label);
 }
 
 export const eventChange = (event: Event): void => {
-    const {target} = getTargetAndPreviousElement(event)
-    const input: Pick<OptionField, 'value'> = (target as Pick<OptionField, 'value'>)
-    const tagName: string = target.getAttribute('name') ?? ''
-
-    input.value = formatField(tagName, input.value ?? '')
+    const {target: input} = getTargetAndPreviousElement(event);
+    const validateField: Validate = input.getAttribute('data-validate') as Validate;
+    input.value = getCorrectStringByValidate(validateField, input.value);
 }
 
 const addClassName = (label: Element): void => {
@@ -35,27 +34,19 @@ const deleteClassByValue = (value: string | undefined, label: Element): void => 
 }
 
 const getTargetAndPreviousElement = (event: Event): TargetAndPreviousElement => {
-    const target: Element = event.target as Element;
+    const target: HTMLInputElement = event.target as HTMLInputElement;
     const label: Element = target.previousElementSibling as Element;
     return {target, label}
 }
 
-export const formatField = (field: string, value: string): string => {
-    let result:string
-
+export const getCorrectStringByValidate = (field: Validate, value: string = ''): string => {
     switch (field) {
-        case 'phone':
-            let newstr:string = value.replace(/[^\d]/ig, '')
-
-            newstr = '+' + newstr
-            result = newstr
-
-            break;
+        case ValidateType.phone: {
+            let stringWithNumbers: string = value.replace(/\D/ig, '');
+            if (!stringWithNumbers) return '';
+            return '+' + stringWithNumbers;
+        }
         default:
-            result = value
-
-            break;
+            return value;
     }
-
-    return result ?? value
 }
